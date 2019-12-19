@@ -4,7 +4,7 @@
   {% for article in object_list %}
       <div class="box">
       <h3><a href="{% url 'detail' article.pk %}">{{ article.title }}</a></h3>
-      <p>{{ article.author }} | {{ article.created_on}} </p>
+      <p>{{ article.author }} | {{ article.created_on|date:"D d M Y"}} </p>
       <p>{{ article.body|slice:":200" }}</p>
       <p style="font-size: small;">{{ article.comments.all.count }} comentarios</p>
     </div>
