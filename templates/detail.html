@@ -5,6 +5,7 @@
   <div class="box">
     <div class="article-cont">
       <h2>{{ article.title }}</h2>
+      <p class="smaller">{{ article.author }} | {{ article.created_on|date:"D d M Y" }}</p>
       <p>{{ article.body }}</p>
     </div>
                 
@@ -25,7 +26,7 @@
       <div class="comment" >
         <p>
           <h4>{{ comment.user }}</h4>
-          <span> {{ comment.created_on }} </span>
+          <span> {{ comment.created_on|date:"D d M Y" }} </span>
         </p>
         {{ comment.body }}
       </div>
