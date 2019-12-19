@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html> 
+<html lang="es">
+ <head>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <title> O Blogapp</title> 
+</head> 
+<body>
+     <header>
+       <h1> <a title="Blog Project" href="{% url 'home' %}">Blog Project</a> </h1>
+       <div>
+        {% if user.is_authenticated %}
+            <p>Hola {{ user.username }}!</p>
+            {% if user.is_staff %}
+            <a title="Crear nuevo artículo" href="/admin/articles/article/add/">Crear nuevo artículo</a>
+            {% endif %}
+            <p><a href="{% url 'logout' %}">Logout</a></p>
+        {% else %}
+            <p>No estás logueado</p>
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'signup' %}">Registrarse</a>
+        {% endif %}
+        </div>
+     </header>
+
+     <div class="container">
+       {% block content %}
+       
+       {% endblock content %}
+     </div>
+ </body> 
+</html>

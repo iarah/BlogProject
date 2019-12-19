@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for post in object_list %}
+      <div class="box">
+      <h3><a href="{% url 'detail' post.pk %}">{{ post.title }}</a></h3>
+      <p>{{ post.author }} | {{ post.created_on}} </p>
+      <p>{{ post.body|slice:":200" }}</p>
+      <p style="font-size: small;">{{ post.comments.all.count }} comentarios</p>
+    </div>
+  {% endfor %}
+{% endblock content %}

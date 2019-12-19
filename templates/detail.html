@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="box">
+    <div class="article-cont">
+      <h2>{{ article.title }}</h2>
+      <p>{{ article.body }}</p>
+    </div>
+                
+    <div class="comments">
+      {% if user.is_authenticated %}
+        <h3>Nuevo comentario</h3>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Publicar</button>
+        </form>
+      {% else %}
+        <p><a title="Iniciar sesión" href="{% url 'login' %}">Inicie sesión</a> o <a title="Registrarse" href="{% url 'signup' %}">Regístrese</a> para poder comentar</p>
+      {% endif %}
+
+      <h3 style="margin-top: 50px;">{{ article.comments.all.count }} comentarios</h3>
+      {% for comment in article.comments.all %}
+      <div class="comment" >
+        <p>
+          <h4>{{ comment.user }}</h4>
+          <span> {{ comment.created_on }} </span>
+        </p>
+        {{ comment.body }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+    
+{% endblock content %}
+
+
+     
